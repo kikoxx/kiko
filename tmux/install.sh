@@ -7,7 +7,7 @@ for ((i=0; i<${#requirements}; i++)); do
     sleep 0.05
 done
 
-sudo apt install tmux xclip dconf-cli
+sudo apt install tmux xclip dconf-cli -y
 
 setup="[+] Setting up kikour tmux config..."
 for ((i=0; i<${#setup}; i++)); do

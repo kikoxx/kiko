@@ -9,9 +9,7 @@ done
 echo # Prints empty line
 
 # Ubuntu / Debian based; Might include exception handling for other OS
-sudo apt install alacritty
-
-sudo apt install npm
+sudo apt install alacritty npm -y 
 
 # https://www.funkyspacemonkey.com/how-to-easily-apply-and-change-alacritty-themes
 sudo npm i -g alacritty-themes
