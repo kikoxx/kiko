@@ -5,10 +5,10 @@
 3. Vim --hackthebox theme
 4. Mount issue --vmware: make shared folders visible
 
-//This repository has not been tested yet 
-
 Things to note
 - Add alias configs into this repo
 - Add github repo automatically
 - Install obsidian, vscode and other applications
 - Other setup configs
+
+DO NOT RUN IT AS ROOT USER
