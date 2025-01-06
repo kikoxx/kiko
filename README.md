@@ -12,3 +12,6 @@ Things to note
 - Other setup configs
 
 DO NOT RUN IT AS ROOT USER
+cd kiko
+chmod +x install.sh
+sudo -E ./install.sh

@@ -12,7 +12,7 @@ echo # Prints empty line
 sudo apt install alacritty npm -y 
 
 # https://www.funkyspacemonkey.com/how-to-easily-apply-and-change-alacritty-themes
-sudo npm i -g alacritty-themes
+sudo npm i -g alacritty-themes -y
 if [ $? -ne 0 ]; then # Check exit code if it's 0 
     echo "Failed to install alacritty-themes. Exiting."
     exit 1
