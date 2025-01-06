@@ -41,7 +41,6 @@ prompt_user
 
 # Run vim install
 run_installation "mount"
-prompt_user
 
 # Wait for all background processes to finish
 wait

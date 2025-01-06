@@ -10,11 +10,8 @@ echo # Prints empty line
 
 # Ubuntu / Debian based; Might include exception handling for other OS
 sudo apt install alacritty
-if [ $? -ne 0 ]; then
-    echo "Failed to install alacritty. Exiting."
-    exit 1
-fi
-echo
+
+sudo apt install npm
 
 # https://www.funkyspacemonkey.com/how-to-easily-apply-and-change-alacritty-themes
 sudo npm i -g alacritty-themes
