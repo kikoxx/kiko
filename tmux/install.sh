@@ -7,7 +7,7 @@ for ((i=0; i<${#requirements}; i++)); do
     sleep 0.05
 done
 
-sudo apt -E install tmux xclip dconf-cli -y
+sudo apt install tmux xclip dconf-cli -y
 
 setup="[+] Setting up kikour tmux config..."
 for ((i=0; i<${#setup}; i++)); do
@@ -16,9 +16,9 @@ for ((i=0; i<${#setup}; i++)); do
 done
 echo
 
-cp kikour_tmux.conf ~/.tmux.conf
+cp tmux/kikour_tmux.conf ~/.tmux.conf
 mkdir -p ~/Scripts
-cp vpnIP_VM.sh ~/Scripts/vpnIP_VM.sh
+cp tmux/vpnIP_VM.sh ~/Scripts/vpnIP_VM.sh
 chmod +x ~/Scripts/vpnIP_VM.sh
 
 tmux_plugin="Adding tmux plugin manager..."
