@@ -9,10 +9,10 @@ done
 echo # Prints empty line
 
 # Ubuntu / Debian based; Might include exception handling for other OS
-sudo -E apt install alacritty npm -y 
+sudo apt install alacritty npm -y 
 
 # https://www.funkyspacemonkey.com/how-to-easily-apply-and-change-alacritty-themes
-sudo -E npm i -g alacritty-themes -y
+sudo npm i -g alacritty-themes -y
 if [ $? -ne 0 ]; then # Check exit code if it's 0 
     echo "Failed to install alacritty-themes. Exiting."
     exit 1
@@ -29,7 +29,7 @@ fi
 alacritty_config_path="$HOME/.config/alacritty/alacritty.toml"
 # https://github.com/audibleblink/hackthebox.vim?tab=readme-ov-file
 
-cat <<EOL >> "$alacritty_config_path" # <<EOL EOL is a delimiter, << start here document, ends when it sees the delimiter
+cat <<EOL >> "$alacritty_config_path" # <<EOL is a delimiter, << start here document, ends when it sees the delimiter
 # alacritty.toml
 
 [colors.primary]
