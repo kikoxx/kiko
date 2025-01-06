@@ -1,35 +1,36 @@
 #!/bin/bash
 
-# Function to run install scripts
+# Function to run installation scripts
 run_installation() {
     local dir=$1
     local script="$dir/install.sh"
     if [ -f "$script" ]; then
         echo "[+] Running $script..."
-        bash "$script" &
-        return $!  # Return the PID of the background process
+        bash "$script"  # Run the script synchronously (blocking)
+        if [ $? -ne 0 ]; then  # Check for failure
+            echo "[-] $script failed. Exiting."
+            exit 1
+        fi
     else
         echo "[-] $script not found!"
-        return 1  # Indicate failure
+        exit 1
     fi
 }
 
-# Main installation process
+# Start installations
 echo "[+] Starting installations..."
 
-# Run installations in parallel
-declare -a pids
-run_installation "alacritty" && pids+=($!)
-run_installation "vim" && pids+=($!)
-run_installation "tmux" && pids+=($!)
-run_installation "mount" && pids+=($!)
+# Run alacritty install
+run_installation "alacritty"
 
-# Wait for all processes and check their status
-for pid in "${pids[@]}"; do
-    if ! wait $pid; then
-        echo "[-] A background installation failed. Check logs for details."
-        exit 1
-    fi
-done
+# Run tmux install
+run_installation "tmux"
 
+# Run vim install
+run_installation "vim"
+
+# Run mount install
+run_installation "mount"
+
+# Completion message
 echo "[+] All installations are complete!"

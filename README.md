@@ -13,5 +13,8 @@ Things to note
 
 DO NOT RUN IT AS ROOT USER
 cd kiko
-chmod +x install.sh
-sudo -E ./install.sh
+./install.sh
+Restart for mount to work.
+
+Changes:
+chmod +x install.sh not needed //locally done it for all install.sh
