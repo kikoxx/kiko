@@ -18,6 +18,7 @@ echo
 
 cp tmux/kikour_tmux.conf ~/.tmux.conf
 mkdir -p ~/Scripts
+touch vpnIP_VM.sh
 cp tmux/vpnIP_VM.sh ~/Scripts/vpnIP_VM.sh
 chmod +x ~/Scripts/vpnIP_VM.sh
 
