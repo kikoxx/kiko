@@ -1,0 +1,42 @@
+* **Custom Prefix:** The default prefix key has been remapped to **`Ctrl-a`**.
+* **VM Copy/Paste:** Hold `Shift` while highlighting text to use your host machine's normal cursor. This bypasses tmux's internal mouse mode, allowing you to easily copy and paste text directly out of a Virtual Machine environment.
+```bash
+tmux # start new session
+tmux new -s work # start new session named work
+tmux ls # lsit all sessions
+
+tmux attach -t work # reattach to session named work
+tmux a # attaches to most recent session
+
+tmux kill-session -t work # kill session named work
+tmux kill-server # kill everything all sessions
+
+# From inside tmux
+prefix + d # detach from current session, everything stays in the background
+prefix  + s # show list of sessions
+prefix + $ # rename current session
+prefix + ( # prev session
+prefix + ) # next session
+prefix + : # open command prompt
+```
+
+| Action / Mode                | Shortcut                         |
+| ---------------------------- | -------------------------------- |
+| **Prefix**                   | `Ctrl‑A`                         |
+| **Reload tmux config**       | `Ctrl‑A` then `r`                |
+| Panges                       |                                  |
+| **Split pane horizontally**  | `Ctrl‑A` then \|                 |
+| **Split pane vertically**    | `Ctrl‑A` then `-`                |
+| **Move between panes**       | `Ctrl‑A` + ←/→/↑/↓`              |
+| ==Windows==                  |                                  |
+| **Swap windows**             | `Ctrl‑A` + `Shift+←/→`           |
+| **Next/Prev window**         | `Ctrl‑A` + `Shift+→` / `Shift+←` |
+| **Copy mode (mouse scroll)** | Scroll up/down or `Ctrl‑A` + `[` |
+| **Copy selection**           | In copy mode: press `Enter`      |
+| **Mouse selection copy**     | Drag mouse in copy mode          |
+| **New window in cwd**        | `Ctrl‑A` then `c`                |
+| **Vim keys in copy mode**    | Enabled via `mode-keys vi`       |
+| Rename Window                | Ctrl-A ,                         |
+
+🔗 External Resources
+QuickRef.me - Comprehensive Tmux Cheatsheet
