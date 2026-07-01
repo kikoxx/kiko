@@ -24,19 +24,21 @@ prefix + : # open command prompt
 | ---------------------------- | -------------------------------- |
 | **Prefix**                   | `Ctrl‑A`                         |
 | **Reload tmux config**       | `Ctrl‑A` then `r`                |
-| Panges                       |                                  |
+|                           ==Pages==                             |
 | **Split pane horizontally**  | `Ctrl‑A` then \|                 |
 | **Split pane vertically**    | `Ctrl‑A` then `-`                |
 | **Move between panes**       | `Ctrl‑A` + ←/→/↑/↓`              |
-| ==Windows==                  |                                  |
+|                          ==Windows==                            |
 | **Swap windows**             | `Ctrl‑A` + `Shift+←/→`           |
 | **Next/Prev window**         | `Ctrl‑A` + `Shift+→` / `Shift+←` |
+| **New window in cwd**        | `Ctrl‑A` then `c`                |
+| Rename Window                | Ctrl-A ,                         |
+|                          ==Others==                             |
 | **Copy mode (mouse scroll)** | Scroll up/down or `Ctrl‑A` + `[` |
 | **Copy selection**           | In copy mode: press `Enter`      |
 | **Mouse selection copy**     | Drag mouse in copy mode          |
-| **New window in cwd**        | `Ctrl‑A` then `c`                |
 | **Vim keys in copy mode**    | Enabled via `mode-keys vi`       |
-| Rename Window                | Ctrl-A ,                         |
+
 
 🔗 External Resources
 QuickRef.me - Comprehensive Tmux Cheatsheet
