@@ -8,8 +8,6 @@ for ((i=0; i<${#requirements}; i++)); do
 done
 
 sudo apt install tmux xclip dconf-cli -y
-sudo apt install spice-vdagent # Fix to copying contents out of VM
-sudo systemctl enable --now spice-vdagentd
 # Ensure vmtools are installed, sudo apt install open-vm-tools open-vm-tools-desktop (FOR VMWARE)
 
 setup="[+] Setting up kikour tmux config..."
