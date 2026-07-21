@@ -28,6 +28,9 @@ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
 # cleanups
 rm -rf ~/icons-in-terminal
+
+# If icon not rendered properly
+sudo apt update && sudo apt install -y fonts-noto-cjk
 ```
 1. Power manager > Screen Saver management > Idle: x minutes (How long before computer turns blank)
 2. Clipman settings > Check checkbox sync mouse selecitons
