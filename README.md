@@ -18,3 +18,16 @@ Restart for mount to work.
 
 Changes:
 chmod +x install.sh not needed //locally done it for all install.sh
+
+### After installation
+```bash
+
+# Change to whichever directory, and update the directory accordingly
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
+# cleanups
+rm -rf ~/icons-in-terminal
+```
+1. Power manager > Screen Saver management > Idle: x minutes (How long before computer turns blank)
+2. Clipman settings > Check checkbox sync mouse selecitons
