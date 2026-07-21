@@ -11,7 +11,7 @@ echo
 
 # Check if the entry is already in /etc/fstab
 if ! grep -q ".host:/    /mnt/hgfs/" /etc/fstab; then
-    sudo sh -c 'echo ".host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0" >> /etc/fstab'
+    sudo sh -c 'echo ".host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,nofail,x-systemd.automount,uid=1000     0    0" >> /etc/fstab'
     echo "[+] Entry added to /etc/fstab"
 else
     echo "[+] Entry already exists in /etc/fstab"
