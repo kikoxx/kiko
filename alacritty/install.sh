@@ -89,4 +89,6 @@ save_to_clipboard = false
 EOL
 
 echo -e "\n${GREEN}${BOLD}✅ Alacritty setup done!${RESET}"
+echo -e "${YELLOW}💡 Note: For 'blur = true' to work, ensure your XFCE Window Manager Compositor is enabled:"
+echo -e "   Go to Applications > Window Manager Tweaks > Compositor > Check 'Enable display compositing'.${RESET}"
 echo -e "${CYAN}🏁 Exiting script now...${RESET}\n"
