@@ -1,38 +1,57 @@
 #!/bin/bash
 
-alacritty="[+] Downloading alacritty..."
+# Define formatting and color variables
+BOLD='\033[1m'
+GREEN='\033[1;32m'
+RED='\033[1;31m'
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[1;36m'
+RESET='\033[0m'
 
-for ((i=0; i<${#alacritty}; i++)); do
-    echo -n "${alacritty:$i:1}"
-    sleep 0.05
-done
-echo # Prints empty line
+echo -e "${YELLOW}${BOLD}⚙️  Setting up Alacritty terminal...${RESET}\n"
 
-# Ubuntu / Debian based; Might include exception handling for other OS
-sudo apt install alacritty
-sudo apt install npm -y 
-
-# https://www.funkyspacemonkey.com/how-to-easily-apply-and-change-alacritty-themes
-sudo npm i -g alacritty-themes -y
-if [ $? -ne 0 ]; then # Check exit code if it's 0 
-    echo "Failed to install alacritty-themes. Exiting."
+# Ubuntu / Debian based installation
+echo -e "▶️  ${BLUE}Installing Alacritty and npm dependencies...${RESET}"
+sudo apt install alacritty npm -y 
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Failed to install alacritty or npm. Exiting.${RESET}"
     exit 1
 fi
 
-echo
-# The alacritty.toml config file was created here /home/kali/.config/alacritty/alacritty.toml
+# Install alacritty-themes manager
+echo -e "\n▶️  ${BLUE}Installing alacritty-themes...${RESET}"
+sudo npm i -g alacritty-themes -y
+if [ $? -ne 0 ]; then 
+    echo -e "${RED}❌ Failed to install alacritty-themes. Exiting.${RESET}"
+    exit 1
+fi
+
+echo -e "\n▶️  ${BLUE}Creating initial Alacritty config file...${RESET}"
 alacritty-themes --create
-if [ $? -ne 0 ]; then # Check exit code if it's 0 
-    echo "Failed to create alacritty config file. Exiting."
+if [ $? -ne 0 ]; then 
+    echo -e "${RED}❌ Failed to create alacritty config file. Exiting.${RESET}"
     exit 1
 fi
 
 alacritty_config_path="$HOME/.config/alacritty/alacritty.toml"
-# https://github.com/audibleblink/hackthebox.vim?tab=readme-ov-file
 
-cat <<EOL >> "$alacritty_config_path" # <<EOL is a delimiter, << start here document, ends when it sees the delimiter
-# alacritty.toml
+# Append glassy background, blur, and custom color scheme
+echo -e "\n▶️  ${BLUE}Applying glassy transparency, blur, and custom theme to alacritty.toml...${RESET}"
+cat << 'EOL' >> "$alacritty_config_path"
 
+# ==========================================
+# Glassy Transparency & Blur Customization
+# ==========================================
+[window]
+opacity = 0.85
+blur = true
+padding = { x = 12, y = 12 }
+dynamic_padding = true
+
+# ==========================================
+# Color Scheme & Selection
+# ==========================================
 [colors.primary]
 background = "#1a2332"
 foreground = "#a4b1cd"
@@ -69,10 +88,5 @@ white = "#ffffff"
 save_to_clipboard = false
 EOL
 
-
-exit_txt="Exiting script now..."
-for ((i=0; i<${#exit_txt}; i++)); do
-    echo -n "${exit_txt:$i:1}"
-    sleep 0.05
-done
-echo
+echo -e "\n${GREEN}${BOLD}✅ Alacritty setup done!${RESET}"
+echo -e "${CYAN}🏁 Exiting script now...${RESET}\n"
