@@ -30,7 +30,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Write a clean, working .vimrc with transparency integration
+# Write a clean, working .vimrc with correct transparency overriding
 echo -e "▶️  ${BLUE}Configuring ~/.vimrc...${RESET}"
 cat << 'EOF' > ~/.vimrc
 set termguicolors
@@ -38,8 +38,9 @@ syntax on
 set background=dark
 colorscheme hackthebox
 
-" Make Vim background transparent to match Alacritty's opacity & blur
-autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+" Force transparent background so Alacritty's glass/blur shows through Vim
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
 EOF
 
 echo -e "\n${GREEN}${BOLD}✅ Vim setup complete!${RESET}"
