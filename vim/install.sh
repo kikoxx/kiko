@@ -17,15 +17,18 @@ for ((i=0; i<${#msg}; i++)); do
 done
 echo
 
+# Get the absolute path of the directory where this script lives
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Install vim-plug
 echo -e "▶️  ${BLUE}Downloading vim-plug...${RESET}"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Copy custom.vim to ~/.vimrc
-if [ -f "custom.vim" ]; then
+# Copy custom.vim to ~/.vimrc using the script's directory path
+if [ -f "$SCRIPT_DIR/custom.vim" ]; then
     echo -e "▶️  ${BLUE}Applying custom.vim configuration to ~/.vimrc...${RESET}"
-    cp custom.vim ~/.vimrc
+    cp "$SCRIPT_DIR/custom.vim" ~/.vimrc
 else
     echo -e "${RED}❌ Error: custom.vim not found in the vim/ directory!${RESET}"
     exit 1
@@ -43,7 +46,7 @@ for ((i=0; i<${#manual}; i++)); do
 done
 echo
 echo "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-echo "cp custom.vim ~/.vimrc"
+echo "cp vim/custom.vim ~/.vimrc"
 echo "vim +PlugInstall +qall"
 echo
 
