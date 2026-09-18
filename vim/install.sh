@@ -17,38 +17,27 @@ for ((i=0; i<${#msg}; i++)); do
 done
 echo
 
-# Install vim-plug
-echo -e "▶️  ${BLUE}Downloading vim-plug...${RESET}"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Create Vim's native color directory
+echo -e "▶️  ${BLUE}Creating native color directories...${RESET}"
+mkdir -p ~/.vim/colors
 
-# Check if the .vimrc file exists
-if [ ! -f ~/.vimrc ]; then
-    echo -e "▶️  ${BLUE}Creating .vimrc file...${RESET}"
-    touch ~/.vimrc
+# Download the HackTheBox theme file directly into the colors folder
+echo -e "▶️  ${BLUE}Downloading HackTheBox theme...${RESET}"
+curl -fLo ~/.vim/colors/hackthebox.vim https://raw.githubusercontent.com/audibleblink/hackthebox.vim/master/colors/hackthebox.vim
+
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Failed to download theme file. Exiting.${RESET}"
+    exit 1
 fi
 
-# Add vim-plug configuration to .vimrc if not already present
-if ! grep -q "call plug#begin" ~/.vimrc; then
-    echo -e "▶️  ${BLUE}Adding vim-plug configuration to .vimrc...${RESET}"
-    cat << 'EOL' >> ~/.vimrc
-
+# Write a clean, working .vimrc
+echo -e "▶️  ${BLUE}Configuring ~/.vimrc...${RESET}"
+cat << 'EOF' > ~/.vimrc
 set termguicolors
 syntax on
-
-call plug#begin('~/.vim/plugged')
-Plug 'audibleblink/hackthebox.vim'
-call plug#end()
-
+set background=dark
 colorscheme hackthebox
-EOL
-else
-    echo -e "✅ ${GREEN}vim-plug configuration already exists in .vimrc.${RESET}"
-fi
-
-# Install plugins headlessly
-echo -e "\n▶️  ${YELLOW}Installing plugins via vim...${RESET}"
-vim -es -u ~/.vimrc +PlugInstall +qall
+EOF
 
 echo -e "\n${GREEN}${BOLD}✅ Vim setup complete!${RESET}"
 echo -e "${CYAN}🏁 Exiting script now...${RESET}\n"
