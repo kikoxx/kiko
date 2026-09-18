@@ -1,6 +1,14 @@
 #!/bin/bash
 
-# Use a clean variable name instead of 'vim'
+# Define formatting and color variables
+BOLD='\033[1m'
+GREEN='\033[1;32m'
+RED='\033[1;31m'
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[1;36m'
+RESET='\033[0m'
+
 msg="[+] Setting up vim configs..."
 
 for ((i=0; i<${#msg}; i++)); do
@@ -10,27 +18,21 @@ done
 echo
 
 # Install vim-plug
+echo -e "▶️  ${BLUE}Downloading vim-plug...${RESET}"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Check if the .vimrc file exists
-if [ ! -f ~/.vimrc ]; then
-    echo "Creating .vimrc file..."
-    touch ~/.vimrc
-fi
-
-# Add vim-plug configuration to .vimrc if not already present
-if ! grep -q "call plug#begin" ~/.vimrc; then
-    echo "Adding vim-plug configuration to .vimrc..."
-    cat << 'EOL' >> ~/.vimrc
-call plug#begin('~/.vim/plugged')
-Plug 'audibleblink/hackthebox.vim'
-call plug#end()
-EOL
+# Copy custom.vim to ~/.vimrc
+if [ -f "custom.vim" ]; then
+    echo -e "▶️  ${BLUE}Applying custom.vim configuration to ~/.vimrc...${RESET}"
+    cp custom.vim ~/.vimrc
+else
+    echo -e "${RED}❌ Error: custom.vim not found in the vim/ directory!${RESET}"
+    exit 1
 fi
 
 # Install plugins headlessly (won't freeze the script)
-echo "Installing plugins with vim..."
+echo -e "\n▶️  ${YELLOW}Installing plugins with vim...${RESET}"
 vim -es -u ~/.vimrc +PlugInstall +qall
 
 # Manual fallback instructions
@@ -41,14 +43,8 @@ for ((i=0; i<${#manual}; i++)); do
 done
 echo
 echo "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-echo
-echo "nano ~/.vimrc"
-echo "call plug#begin('~/.vim/plugged')"
-echo "Plug 'audibleblink/hackthebox.vim'"
-echo "call plug#end()"
-echo
-echo "vim"
-echo ":PlugInstall"
+echo "cp custom.vim ~/.vimrc"
+echo "vim +PlugInstall +qall"
 echo
 
 exit_txt="Exiting script now..."
