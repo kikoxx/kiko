@@ -1,0 +1,13 @@
+alias sl='ls'
+alias update='sudo apt update -y'
+alias upgrade='sudo apt upgrade -y'
+alias install='sudo apt install -y'
+alias disk='du -cks * | sort -rn | head'
+alias strings='strings -a'
+alias nano='nano -w'
+alias ar="autorecon" 
+alias hs="python3 -m http.server 80"
+alias bh=" bloodhound-cli containers up"
+alias sr="cd ~/Downloads/sysreptor/deploy && docker compose start"
+alias oscptoml="sudo autorecon -c /home/kirby/.local/bin/oscp.toml"
+alias tcpicmp="sudo tcpdump -i tun0 -n icmp"

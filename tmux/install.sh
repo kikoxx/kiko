@@ -1,61 +1,36 @@
 #!/bin/bash
 
-requirements="[+] Downloading requirements..."
+# Define formatting and color variables
+BOLD='\033[1m'
+GREEN='\033[1;32m'
+BLUE='\033[1;34m'
+YELLOW='\033[1;33m'
+CYAN='\033[1;36m'
+RESET='\033[0m'
 
-for ((i=0; i<${#requirements}; i++)); do
-    echo -n "${requirements:$i:1}"
-    sleep 0.05
-done
+echo -e "${YELLOW}${BOLD}⚙️  Setting up tmux configurations...${RESET}\n"
 
+echo -e "▶️  ${BLUE}Downloading requirements...${RESET}"
 sudo apt install tmux xclip dconf-cli -y
-# Ensure vmtools are installed, sudo apt install open-vm-tools open-vm-tools-desktop (FOR VMWARE)
+# Ensure vmtools are installed: sudo apt install open-vm-tools open-vm-tools-desktop
 
-setup="[+] Setting up kikour tmux config..."
-for ((i=0; i<${#setup}; i++)); do
-    echo -n "${setup:$i:1}"
-    sleep 0.05
-done
-echo
-
+echo -e "\n▶️  ${BLUE}Setting up kikour tmux config...${RESET}"
 cp tmux/kikour_tmux.conf ~/.tmux.conf
 mkdir -p ~/Scripts
-touch vpnIP_VM.sh
 cp tmux/vpnIP_VM.sh ~/Scripts/vpnIP_VM.sh
 chmod +x ~/Scripts/vpnIP_VM.sh
 
-tmux_plugin="Adding tmux plugin manager..."
-for ((i=0; i<${#tmux_plugin}; i++)); do
-    echo -n "${tmux_plugin:$i:1}"
-    sleep 0.05
-done
-echo
-
+echo -e "\n▶️  ${BLUE}Adding tmux plugin manager...${RESET}"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-echo "Press Prefix+I inside tmux to install the plugins"
+echo -e "${CYAN}💡 Remember to press Prefix+I inside tmux to install the plugins.${RESET}"
 
-icons_install="[+] Installing icons in terminal..."
-for ((i=0; i<${#icons_install}; i++)); do
-    echo -n "${icons_install:$i:1}"
-    sleep 0.05
-done
-echo
-
-cd ~/ ; git clone https://github.com/sebastiencs/icons-in-terminal.git
-cd icons-in-terminal;chmod +x install.sh
+echo -e "\n▶️  ${BLUE}Installing icons in terminal...${RESET}"
+cd ~/
+git clone https://github.com/sebastiencs/icons-in-terminal.git
+cd icons-in-terminal
+chmod +x install.sh
 ./install.sh
 
-setup_done="[-] Done!"
-for ((i=0; i<${#setup_done}; i++)); do
-    echo -n "${setup_done:$i:1}"
-    sleep 0.05
-done
-echo
-
-exit_txt="Exiting script now..."
-for ((i=0; i<${#exit_txt}; i++)); do
-    echo -n "${exit_txt:$i:1}"
-    sleep 0.05
-done
-echo
-
-echo "Open new terminal for the change."
+echo -e "\n${GREEN}${BOLD}✅ tmux setup done!${RESET}"
+echo -e "${GREEN}🏁 Exiting script now...${RESET}"
+echo -e "${CYAN}💡 Open a new terminal for the changes to take effect.${RESET}\n"
