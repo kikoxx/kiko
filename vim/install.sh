@@ -17,42 +17,38 @@ for ((i=0; i<${#msg}; i++)); do
 done
 echo
 
-# Get the absolute path of the directory where this script lives
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 # Install vim-plug
 echo -e "▶️  ${BLUE}Downloading vim-plug...${RESET}"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Copy custom.vim to ~/.vimrc using the script's directory path
-if [ -f "$SCRIPT_DIR/custom.vim" ]; then
-    echo -e "▶️  ${BLUE}Applying custom.vim configuration to ~/.vimrc...${RESET}"
-    cp "$SCRIPT_DIR/custom.vim" ~/.vimrc
-else
-    echo -e "${RED}❌ Error: custom.vim not found in the vim/ directory!${RESET}"
-    exit 1
+# Check if the .vimrc file exists
+if [ ! -f ~/.vimrc ]; then
+    echo -e "▶️  ${BLUE}Creating .vimrc file...${RESET}"
+    touch ~/.vimrc
 fi
 
-# Install plugins headlessly (won't freeze the script)
-echo -e "\n▶️  ${YELLOW}Installing plugins with vim...${RESET}"
+# Add vim-plug configuration to .vimrc if not already present
+if ! grep -q "call plug#begin" ~/.vimrc; then
+    echo -e "▶️  ${BLUE}Adding vim-plug configuration to .vimrc...${RESET}"
+    cat << 'EOL' >> ~/.vimrc
+
+set termguicolors
+syntax on
+
+call plug#begin('~/.vim/plugged')
+Plug 'audibleblink/hackthebox.vim'
+call plug#end()
+
+colorscheme hackthebox
+EOL
+else
+    echo -e "✅ ${GREEN}vim-plug configuration already exists in .vimrc.${RESET}"
+fi
+
+# Install plugins headlessly
+echo -e "\n▶️  ${YELLOW}Installing plugins via vim...${RESET}"
 vim -es -u ~/.vimrc +PlugInstall +qall
 
-# Manual fallback instructions
-manual="Do it manually if it doesn't work:"
-for ((i=0; i<${#manual}; i++)); do
-    echo -n "${manual:$i:1}"
-    sleep 0.05
-done
-echo
-echo "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-echo "cp vim/custom.vim ~/.vimrc"
-echo "vim +PlugInstall +qall"
-echo
-
-exit_txt="Exiting script now..."
-for ((i=0; i<${#exit_txt}; i++)); do
-    echo -n "${exit_txt:$i:1}"
-    sleep 0.05
-done
-echo
+echo -e "\n${GREEN}${BOLD}✅ Vim setup complete!${RESET}"
+echo -e "${CYAN}🏁 Exiting script now...${RESET}\n"
