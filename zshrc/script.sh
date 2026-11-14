@@ -16,7 +16,7 @@ function _sync_vars() {
     
     # Sync VPN IP ($PI) from your script
     if [ -f ~/Scripts/vpnIP_VM.sh ]; then
-        export PI="$(~/Scripts/vpnIP_VM.sh)"
-    fi
+    export PI="$(~/Scripts/vpnIP_VM.sh | grep -oP '(?<=<txt>↻ )[0-9.]+(?= ↺)')"
+fi
 }
 add-zsh-hook precmd _sync_vars
